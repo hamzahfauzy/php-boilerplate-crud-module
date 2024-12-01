@@ -46,7 +46,16 @@ class CrudRepository
 
     function beforeCreate(&$data)
     {
+        // will deprecated
         $file = Utility::parentPath() . "modules/$this->module/hooks/before-create-$this->table.php";
+        $db   = $this->db;
+        if(file_exists($file))
+        {
+            require $file;
+        }
+
+        // new
+        $file = Utility::parentPath() . "modules/$this->module/hooks/$this->table/before-create.php";
         $db   = $this->db;
         if(file_exists($file))
         {
@@ -56,7 +65,16 @@ class CrudRepository
     
     function afterCreate(&$data)
     {
+        // will deprecated
         $file = Utility::parentPath() . "modules/$this->module/hooks/after-create-$this->table.php";
+        $db   = $this->db;
+        if(file_exists($file))
+        {
+            require $file;
+        }
+
+        // new
+        $file = Utility::parentPath() . "modules/$this->module/hooks/$this->table/after-create.php";
         $db   = $this->db;
         if(file_exists($file))
         {
@@ -66,7 +84,16 @@ class CrudRepository
     
     function beforeUpdate(&$data)
     {
+        // will deprecated
         $file = Utility::parentPath() . "modules/$this->module/hooks/before-update-$this->table.php";
+        $db   = $this->db;
+        if(file_exists($file))
+        {
+            require $file;
+        }
+
+        // new
+        $file = Utility::parentPath() . "modules/$this->module/hooks/$this->table/before-update.php";
         $db   = $this->db;
         if(file_exists($file))
         {
@@ -76,7 +103,16 @@ class CrudRepository
     
     function afterUpdate(&$data)
     {
+        // will deprecated
         $file = Utility::parentPath() . "modules/$this->module/hooks/after-update-$this->table.php";
+        $db   = $this->db;
+        if(file_exists($file))
+        {
+            require $file;
+        }
+
+        // new
+        $file = Utility::parentPath() . "modules/$this->module/hooks/$this->table/after-update.php";
         $db   = $this->db;
         if(file_exists($file))
         {
@@ -86,7 +122,16 @@ class CrudRepository
     
     function beforeDelete(&$data)
     {
+        // will deprecated
         $file = Utility::parentPath() . "modules/$this->module/hooks/before-delete-$this->table.php";
+        $db   = $this->db;
+        if(file_exists($file))
+        {
+            require $file;
+        }
+
+        // new
+        $file = Utility::parentPath() . "modules/$this->module/hooks/$this->table/before-delete.php";
         $db   = $this->db;
         if(file_exists($file))
         {
@@ -96,7 +141,16 @@ class CrudRepository
     
     function afterDelete(&$data)
     {
+        // will deprecated
         $file = Utility::parentPath() . "modules/$this->module/hooks/after-delete-$this->table.php";
+        $db   = $this->db;
+        if(file_exists($file))
+        {
+            require $file;
+        }
+
+        // new
+        $file = Utility::parentPath() . "modules/$this->module/hooks/$this->table/after-delete.php";
         $db   = $this->db;
         if(file_exists($file))
         {
@@ -106,7 +160,16 @@ class CrudRepository
 
     function actionButton($data)
     {
+        // will deprecated
         $file = Utility::parentPath() . "modules/$this->module/hooks/action-button-$this->table.php";
+        $db   = $this->db;
+        if(file_exists($file))
+        {
+            return require $file;
+        }
+
+        // new
+        $file = Utility::parentPath() . "modules/$this->module/hooks/$this->table/action-button.php";
         $db   = $this->db;
         if(file_exists($file))
         {
