@@ -11,15 +11,6 @@ $module     = $table->getModule();
 $success_msg = get_flash_msg('success');
 $error_msg   = get_flash_msg('error');
 
-// get data
-$crudRepository = new CrudRepository($tableName);
-$crudRepository->setModule($module);
-
-if(isset($_GET['draw']))
-{
-    return $crudRepository->dataTable($fields);
-}
-
 // page section
 $title = _ucwords(__("$module.label.$tableName"));
 Page::setActive("$module.$tableName");
@@ -42,5 +33,14 @@ Page::setBreadcrumbs([
 Page::pushFoot("<script src='".asset('assets/crud/js/crud.js')."'></script>");
 
 Page::pushHook('index');
+
+// get data
+$crudRepository = new CrudRepository($tableName);
+$crudRepository->setModule($module);
+
+if(isset($_GET['draw']))
+{
+    return $crudRepository->dataTable($fields);
+}
 
 return view('crud/views/index', compact('fields', 'tableName', 'success_msg', 'error_msg', 'crudRepository'));
