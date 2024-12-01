@@ -146,8 +146,9 @@ class CrudRepository
     function delete($clause)
     {
         $this->beforeDelete($clause);
+        $data = $this->find($clause);
         $this->db->delete($this->table, $clause);
-        $this->afterDelete($clause);
+        $this->afterDelete($data);
 
         return true;
     }
