@@ -30,12 +30,26 @@ class CrudRepository
         {
             return require $file;
         }
+
+        $file = Utility::parentPath() . "modules/$this->module/hooks/$this->table/additional-button-before-create.php";
+        $db   = $this->db;
+        if(file_exists($file))
+        {
+            return require $file;
+        }
         return ;
     }
     
     function additionalButtonAfterCreate()
     {
         $file = Utility::parentPath() . "modules/$this->module/hooks/additional-button-after-create-$this->table.php";
+        $db   = $this->db;
+        if(file_exists($file))
+        {
+            return require $file;
+        }
+
+        $file = Utility::parentPath() . "modules/$this->module/hooks/$this->table/additional-button-after-create.php";
         $db   = $this->db;
         if(file_exists($file))
         {
