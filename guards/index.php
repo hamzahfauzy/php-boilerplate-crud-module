@@ -1,5 +1,7 @@
 <?php
 
+use Modules\Crud\Libraries\Sdk\CrudGuardIndex;
+
 $auth = auth();
 $publicRoutes = \Core\Request::getPublicRoutes();
 
@@ -24,4 +26,12 @@ $authRoute = [
 if(!in_array($route, $authRoute) && $auth && !is_allowed($route, $auth->id))
 {
     die('Error 403. Unauthorized');
+}
+
+foreach(CrudGuardIndex::get() as $r => $callback)
+{
+    if($route == $r)
+    {
+        $callback();
+    }
 }
