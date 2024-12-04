@@ -7,5 +7,6 @@ return [
     'delete' => 'Hapus',
     'back'   => 'Kembali',
     'view'   => 'Lihat',
-    'confirm_msg' => 'apakah anda yakin akan menghapus data ini ?'
+    'confirm_msg' => 'apakah anda yakin akan menghapus data ini ?',
+    'choose' => 'Pilih'
 ];
