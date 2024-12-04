@@ -14,10 +14,7 @@ $('.datatable-crud').dataTable({
 })
 
 try {
-    $('select').select2({
-        placeholder: "- Pilih -",
-        allowClear: true
-    })
+    $('select').select2()
 } catch (error) {
     
 }
