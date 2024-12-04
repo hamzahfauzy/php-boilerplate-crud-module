@@ -28,10 +28,13 @@ if(!in_array($route, $authRoute) && $auth && !is_allowed($route, $auth->id))
     die('Error 403. Unauthorized');
 }
 
-foreach(CrudGuardIndex::get() as $r => $callback)
+foreach(CrudGuardIndex::get() as $module => $guardRoute)
 {
-    if($route == $r)
+    foreach($guardRoute as $r => $callback)
     {
-        $callback();
+        if($route == $r)
+        {
+            $callback();
+        }
     }
 }
