@@ -267,11 +267,19 @@ class CrudRepository
         $col_order = $col_order < 0 ? 'id' : $columns[$col_order];
 
         $hookFile = Utility::parentPath() . "modules/$this->module/hooks/index-$this->table.php";
+        $hookFile2 = Utility::parentPath() . "modules/$this->module/hooks/$this->table/index.php";
         if(file_exists($hookFile))
         {
             $db = $this->db;
             $table = $this->table;
             $override = require $hookFile;
+            extract($override);
+        }
+        elseif(file_exists($hookFile2))
+        {
+            $db = $this->db;
+            $table = $this->table;
+            $override = require $hookFile2;
             extract($override);
         }
         else
