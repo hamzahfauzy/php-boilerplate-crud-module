@@ -8,8 +8,8 @@ $('.datatable-crud').dataTable({
     serverSide: true,
     ajax: location.href,
     aLengthMenu: [
-        [25, 50, 100, 200, -1],
-        [25, 50, 100, 200, "All"]
+        [25, 50, 100, 200],
+        [25, 50, 100, 200]
     ],
 })
 
