@@ -16,6 +16,7 @@
             <?= csrf_field() ?>
             <?php 
             foreach($fields as $key => $field): 
+                if($field == '_action_button') continue;
                 $label = $field;
                 $type  = "text";
                 $attr = [
