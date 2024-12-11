@@ -33,18 +33,25 @@ table.table td, table.table th {
                     <tr>
                         <th width="20px">#</th>
                         <?php 
+                        $isActionButton = false;
                         foreach($fields as $field): 
                             $label = $field;
                             if(is_array($field))
                             {
                                 $label = $field['label'];
                             }
-                            $label = _ucwords($label);
+                            if($label == '_action_button')
+                            {
+                                $isActionButton = true;
+                            }
+                            $label = $label == '_action_button' ? __('crud.label.action_button') : _ucwords($label);
                         ?>
                         <th><?=$label?></th>
                         <?php endforeach ?>
+                        <?php if(!$isActionButton): ?>
                         <th class="text-right">
                         </th>
+                        <?php endif ?>
                     </tr>
                 </thead>
             </table>

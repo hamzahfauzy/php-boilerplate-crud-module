@@ -315,8 +315,41 @@ class CrudRepository
         foreach($data as $key => $d)
         {
             $results[$key][] = $start+$key+1;
+            $isActionExists = false;
+            $action = '';
+
+            $action .= $this->actionButton($d);
+
+            if($customAction)
+            {
+                $action .= $customAction($d);
+            }
+            else
+            {
+                $params = ['table'=>$this->table,'id'=>$d->id];
+                if(isset($_GET['filter']))
+                {
+                    $params['filter'] = $_GET['filter'];
+                }
+                if(is_allowed(parsePath(routeTo('crud/edit', ['table'=>$this->table])), auth()->id))
+                {
+                    $action .= '<a href="'.routeTo('crud/edit',$params).'" class="btn btn-sm btn-warning"><i class="fas fa-pencil-alt"></i> '.__('crud.label.edit').'</a> ';
+                }
+
+                if(is_allowed(parsePath(routeTo('crud/delete', ['table'=>$this->table])), auth()->id))
+                {
+                    $action .= '<a href="'.routeTo('crud/delete',$params).'" onclick="if(confirm(\''.__('crud.label.confirm_msg').'\')){return true}else{return false}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> '.__('crud.label.delete').'</a>';
+                }
+            }
+
             foreach($columns as $col)
             {
+                if($col == '_action_button')
+                {
+                    $results[$key][] = $action;
+                    continue;
+                }
+                
                 $field = '';
                 if(isset($fields[$col]))
                 {
@@ -348,35 +381,11 @@ class CrudRepository
 
                 $results[$key][] = $data_value;
             }
-
-            $action = '';
-
-            $action .= $this->actionButton($d);
-
-            if($customAction)
-            {
-                $action .= $customAction($d);
-            }
-            else
-            {
-                $params = ['table'=>$this->table,'id'=>$d->id];
-                if(isset($_GET['filter']))
-                {
-                    $params['filter'] = $_GET['filter'];
-                }
-                if(is_allowed(parsePath(routeTo('crud/edit', ['table'=>$this->table])), auth()->id))
-                {
-                    $action .= '<a href="'.routeTo('crud/edit',$params).'" class="btn btn-sm btn-warning"><i class="fas fa-pencil-alt"></i> '.__('crud.label.edit').'</a> ';
-                }
-
-                if(is_allowed(parsePath(routeTo('crud/delete', ['table'=>$this->table])), auth()->id))
-                {
-                    $action .= '<a href="'.routeTo('crud/delete',$params).'" onclick="if(confirm(\''.__('crud.label.confirm_msg').'\')){return true}else{return false}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> '.__('crud.label.delete').'</a>';
-                }
-            }
-
             
-            $results[$key][] = $action;
+            if(!$isActionExists)
+            {
+                $results[$key][] = $action;
+            }
         }
 
         return [

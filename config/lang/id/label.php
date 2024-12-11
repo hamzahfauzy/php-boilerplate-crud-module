@@ -8,5 +8,6 @@ return [
     'back'   => 'Kembali',
     'view'   => 'Lihat',
     'confirm_msg' => 'apakah anda yakin akan menghapus data ini ?',
-    'choose' => '- Pilih -'
+    'choose' => '- Pilih -',
+    'action_button' => 'Aksi',
 ];
