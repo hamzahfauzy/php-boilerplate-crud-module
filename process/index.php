@@ -29,6 +29,8 @@ if(isset($fields['_userstamp']))
         'label' => __('crud.label.updated_by'),
         'type' => 'options-obj:users,id,name'
     ];
+
+    unset($fields['_userstamp']);
 }
 
 // page section
