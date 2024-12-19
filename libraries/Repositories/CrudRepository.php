@@ -211,7 +211,7 @@ class CrudRepository
 
     function create($data)
     {
-        $fields = $this->getFields();
+        $fields = $this->getFields()[$this->table];
         if(isset($fields['_userstamp']))
         {
             $data['created_by'] = auth()->id;
@@ -225,7 +225,7 @@ class CrudRepository
 
     function update($data, $clause)
     {
-        $fields = $this->getFields();
+        $fields = $this->getFields()[$this->table];
         if(isset($fields['_userstamp']))
         {
             $data['updated_by'] = auth()->id;
