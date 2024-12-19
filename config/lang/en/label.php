@@ -10,4 +10,8 @@ return [
     'confirm_msg' => 'are you sure ?',
     'choose' => '- Choose -',
     'action_button' => 'Action',
+    'created_at' => 'Created at',
+    'created_by' => 'Created by',
+    'updated_by' => 'Updated by',
+    'updated_at' => 'Updated at',
 ];

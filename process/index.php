@@ -11,7 +11,25 @@ $module     = $table->getModule();
 $success_msg = get_flash_msg('success');
 $error_msg   = get_flash_msg('error');
 
-unset($fields['_userstamp']);
+if(isset($fields['_userstamp']))
+{
+    $fields['created_at'] = [
+        'label' => __('crud.label.created_at'),
+        'type' => 'text'
+    ];
+    $fields['created_by'] = [
+        'label' => __('crud.label.created_by'),
+        'type' => 'options-obj:users,id,name'
+    ];
+    $fields['updated_at'] = [
+        'label' => __('crud.label.updated_at'),
+        'type' => 'text'
+    ];
+    $fields['updated_by'] = [
+        'label' => __('crud.label.updated_by'),
+        'type' => 'options-obj:users,id,name'
+    ];
+}
 
 // page section
 $title = _ucwords(__("$module.label.$tableName"));
