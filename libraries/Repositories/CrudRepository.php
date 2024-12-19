@@ -22,6 +22,13 @@ class CrudRepository
         $this->module = $module;
     }
 
+    function getFields()
+    {
+        $parent_path = Utility::parentPath();
+        $tableFieldsFile = $parent_path . 'modules/' . $this->module . "/config/table-fields.php";
+        return require $tableFieldsFile;
+    }
+
     function additionalButtonBeforeCreate()
     {
         $file = Utility::parentPath() . "modules/$this->module/hooks/additional-button-before-create-$this->table.php";
@@ -204,6 +211,11 @@ class CrudRepository
 
     function create($data)
     {
+        $fields = $this->getFields();
+        if(isset($fields['_userstamp']))
+        {
+            $data['created_by'] = auth()->id;
+        }
         $this->beforeCreate($data);
         $data = $this->db->insert($this->table, $data);
         $this->afterCreate($data);
@@ -213,6 +225,11 @@ class CrudRepository
 
     function update($data, $clause)
     {
+        $fields = $this->getFields();
+        if(isset($fields['_userstamp']))
+        {
+            $data['updated_by'] = auth()->id;
+        }
         $this->beforeUpdate($data);
         $data = $this->db->update($this->table, $data, $clause);
         $this->afterUpdate($data);

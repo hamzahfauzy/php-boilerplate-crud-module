@@ -14,6 +14,8 @@ $title      = _ucwords(__("$module.label.$tableName"));
 $error_msg  = get_flash_msg('error');
 $old        = get_flash_msg('old');
 
+unset($fields['_userstamp']);
+
 if(Request::isMethod('POST'))
 {
     $data = isset($_POST[$tableName]) ? $_POST[$tableName] : [];

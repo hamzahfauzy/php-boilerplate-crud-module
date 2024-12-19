@@ -11,6 +11,8 @@ $module     = $table->getModule();
 $success_msg = get_flash_msg('success');
 $error_msg   = get_flash_msg('error');
 
+unset($fields['_userstamp']);
+
 // page section
 $title = _ucwords(__("$module.label.$tableName"));
 Page::setActive("$module.$tableName");
