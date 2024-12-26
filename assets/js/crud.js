@@ -19,6 +19,16 @@ try {
     
 }
 
+if($("input[data-type='currency']"))
+{
+    
+    $("input[data-type='currency']").each(function(){
+        const el = $(this)
+        el.attr('type','text')
+        formatCurrency(el);
+    })
+}
+
 $("input[data-type='currency']").on({
     keyup: function() {
       formatCurrency($(this));
@@ -73,7 +83,7 @@ function formatCurrency(input, blur) {
     right_side = right_side.substring(0, 2);
 
     // join number by .
-    input_val = left_side + "." + right_side;
+    input_val = left_side //  + "." + right_side;
 
   } else {
     // no decimal entered
@@ -93,3 +103,15 @@ function formatCurrency(input, blur) {
   caret_pos = updated_len - original_len + caret_pos;
   input[0].setSelectionRange(caret_pos, caret_pos);
 }
+
+$('form').on('submit', function(){
+    if($(this).find("input[data-type='currency']"))
+    {
+        $("input[data-type='currency']").each(function(){
+            const el = $(this)
+            var val = el.val()
+            val = val.replaceAll(',','')
+            el.val(val)
+        })
+    }
+})
