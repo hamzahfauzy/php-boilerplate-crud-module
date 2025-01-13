@@ -262,7 +262,7 @@ class CrudRepository
         {
             $columns[] = is_array($field) ? $key : $field;
             if(is_array($field) && isset($field['search']) && !$field['search']) continue;
-            $search_columns[] = is_array($field) ? $key : $field;
+            $search_columns[] = !is_array($field) ? $field : (isset($field['search']) ? $field['search'] : $key);
         }
 
         $where = "";
