@@ -29,6 +29,14 @@ if($("input[data-type='currency']"))
     })
 }
 
+$(document)
+.on('keyup', "input[data-type='currency']", function(){
+  formatCurrency($(this))
+})
+.on('blur', "input[data-type='currency']", function(){
+  formatCurrency($(this), 'blur')
+})
+
 $("input[data-type='currency']").on({
     keyup: function() {
       formatCurrency($(this));
@@ -108,13 +116,18 @@ function formatCurrency(input, blur) {
   input[0].setSelectionRange(caret_pos, caret_pos);
 }
 
+function cleanCurrencyFormat(val)
+{
+  return val.replaceAll(',','')
+}
+
 $('form').on('submit', function(){
     if($(this).find("input[data-type='currency']"))
     {
         $("input[data-type='currency']").each(function(){
             const el = $(this)
             var val = el.val()
-            val = val.replaceAll(',','')
+            val = cleanCurrencyFormat(val)
             el.val(val)
         })
     }
