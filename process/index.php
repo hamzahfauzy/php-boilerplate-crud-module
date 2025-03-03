@@ -5,9 +5,9 @@ use Modules\Crud\Libraries\Repositories\CrudRepository;
 
 // init table fields
 $tableName  = $_GET['table'];
-$table      = tableFields($tableName);
+$table      = tableFields($tableName, isset($module) ? $module : false);
 $fields     = $table->getFields();
-$module     = $table->getModule();
+$module     = isset($module) ? $module : $table->getModule();
 $success_msg = get_flash_msg('success');
 $error_msg   = get_flash_msg('error');
 
